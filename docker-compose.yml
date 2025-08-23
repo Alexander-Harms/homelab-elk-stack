@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
@@ -42,12 +40,15 @@ services:
       - "LS_JAVA_OPTS=-Xmx1g -Xms1g"
       - "PIPELINE_WORKERS=2"
       - xpack.monitoring.enabled=false
+      - "pipeline.batch.size=125"
+      - "pipeline.batch.delay=50"
+      - "log.level=info"
+      - "log.format=json"
+      - "node.name=logstash-homelab"
     volumes:
       - /mnt/elk-storage/logstash:/usr/share/logstash/data
-      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./config/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
       - ./pipelines:/usr/share/logstash/pipeline:ro
-      - /usr/share/logstash/logs
     ports:
       - "5044:5044"
       - "5000:5000"

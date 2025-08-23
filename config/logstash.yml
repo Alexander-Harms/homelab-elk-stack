@@ -1,7 +1,7 @@
 node.name: logstash-homelab
 path.data: /usr/share/logstash/data
 path.config: /usr/share/logstash/pipeline
-path.logs: /usr/share/logstash/logs
+path.logs: /usr/share/logstash/data/logs
 pipeline.workers: 2
 pipeline.batch.size: 125
 pipeline.batch.delay: 50
