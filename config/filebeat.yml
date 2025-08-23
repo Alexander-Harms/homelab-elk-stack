@@ -26,23 +26,11 @@ processors:
         stack: elk
         log_type: docker
 
-output.elasticsearch:
-  hosts: ["elasticsearch:9200"]
-  index: "logs-docker-%{+yyyy.MM.dd}"
-  template.name: "logs-docker"
-  template.pattern: "logs-docker-*"
-  template.settings:
-    index.number_of_shards: 1
-    index.number_of_replicas: 0
+# Send to Logstash instead of Elasticsearch
+output.logstash:
+  hosts: ["logstash:5044"]
 
-setup.template.enabled: true
-setup.template.name: "logs-docker"
-setup.template.pattern: "logs-docker-*"
+setup.template.enabled: false
 
 logging.level: info
-logging.to_files: true
-logging.files:
-  path: /usr/share/filebeat/logs
-  name: filebeat.log
-  keepfiles: 7
-  permissions: 0644
+logging.to_stderr: true

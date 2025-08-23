@@ -1,14 +1,5 @@
-# Logstash pipeline configuration
-# This allows you to run multiple pipelines with different configurations
-
 - pipeline.id: main
   path.config: "/usr/share/logstash/pipeline/main.conf"
   pipeline.workers: 2
   pipeline.batch.size: 125
   pipeline.batch.delay: 50
-  
-- pipeline.id: docker
-  path.config: "/usr/share/logstash/pipeline/docker.conf"  
-  pipeline.workers: 1
-  pipeline.batch.size: 50
-  pipeline.batch.delay: 10
