@@ -1,0 +1,48 @@
+filebeat.inputs:
+  - type: container
+    enabled: true
+    paths:
+      - '/var/lib/docker/containers/*/*.log'
+    processors:
+      - add_docker_metadata:
+          host: "unix:///var/run/docker.sock"
+          match_fields: ["container.id"]
+          match_pids: ["process.pid", "process.parent.pid"]
+      - decode_json_fields:
+          fields: ["message"]
+          target: ""
+          overwrite_keys: true
+          add_error_key: true
+      - drop_fields:
+          fields: ["agent", "ecs", "input"]
+
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_fields:
+      target: 'fields'
+      fields:
+        environment: homelab
+        stack: elk
+        log_type: docker
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  index: "logs-docker-%{+yyyy.MM.dd}"
+  template.name: "logs-docker"
+  template.pattern: "logs-docker-*"
+  template.settings:
+    index.number_of_shards: 1
+    index.number_of_replicas: 0
+
+setup.template.enabled: true
+setup.template.name: "logs-docker"
+setup.template.pattern: "logs-docker-*"
+
+logging.level: info
+logging.to_files: true
+logging.files:
+  path: /usr/share/filebeat/logs
+  name: filebeat.log
+  keepfiles: 7
+  permissions: 0644

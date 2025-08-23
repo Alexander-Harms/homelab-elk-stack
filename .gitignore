@@ -1,0 +1,68 @@
+# ELK Stack Git Ignore File
+
+# Docker Compose overrides
+docker-compose.override.yml
+docker-compose.*.yml
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Backup directories and files
+backup/
+*.backup
+*.bak
+*.bk*
+
+# Log files
+*.log
+logs/
+
+# Data directories (should be mounted externally)
+data/
+elasticsearch_data/
+logstash_data/
+kibana_data/
+filebeat_data/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Cleanup scripts (temporary)
+cleanup-*.sh
+deploy-*.sh
+migration-*.sh
+setup-*.sh
+
+# Certificate files (if using TLS later)
+certs/
+certificates/
+*.crt
+*.key
+*.pem
+*.p12
+
+# Local configuration overrides
+local/
+local.yml
+*-local.yml
