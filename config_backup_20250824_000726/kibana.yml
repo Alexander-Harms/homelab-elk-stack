@@ -3,7 +3,6 @@ server.host: "0.0.0.0"
 server.port: 5601
 elasticsearch.hosts: ["http://elasticsearch:9200"]
 xpack.security.enabled: false
-xpack.encryptedSavedObjects.encryptionKey: "b249c81af5670ccb3daada67bf0564d8"
 elasticsearch.requestTimeout: 90000
 elasticsearch.shardTimeout: 30000
 logging.appenders.file.type: file

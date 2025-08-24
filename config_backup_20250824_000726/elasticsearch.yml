@@ -3,7 +3,6 @@ network.host: 0.0.0.0
 http.port: 9200
 discovery.type: single-node
 xpack.security.enabled: false
-xpack.license.self_generated.type: basic
 bootstrap.memory_lock: false
 indices.fielddata.cache.size: 40%
 action.auto_create_index: "+*"
