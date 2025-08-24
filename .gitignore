@@ -66,3 +66,5 @@ certificates/
 local/
 local.yml
 *-local.yml
+# Ignore config backup directories
+*backup*
